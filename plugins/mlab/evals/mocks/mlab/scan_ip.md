@@ -1,0 +1,6 @@
+---
+expect:
+  ip: string
+---
+
+{"ip":"{{input.ip}}","status":"success","as":"AS60729 Stiftung Erneuerbare Freiheit","isp":"Stiftung Erneuerbare Freiheit","org":"Artikel10 e.V","city":"Brandenburg an der Havel","region":"Brandenburg","country":"Germany","country_code":"DE","continent":"Europe","lat":52.6171,"lon":13.1207,"timezone":"Europe/Berlin","hosting":true,"proxy":true,"mobile":false,"reserved":false,"tor":{"available":true,"is_tor":true,"is_exit":true,"is_guard":false,"is_relay":true,"fingerprint":"6C64100D8F7050E76F420CE404031EABC7101124","nickname":"artikel10ber03","as_number":"AS60729","as_name":"Stiftung Erneuerbare Freiheit","country":"de","first_seen":1780066730,"last_seen":1789916475,"source":"onionoo+torbulkexitlist"},"rdns":{"found":true,"name":"berlin01.tor-exit.artikel10.org","names":["berlin01.tor-exit.artikel10.org"],"forward_confirmed":true},"rdap":{"found":true,"handle":"185.220.101.0 - 185.220.101.31","name":"ARTIKEL10","holder":"ARTIKEL10-MNT","cidr":"185.220.101.0/27","country":"DE","abuse_name":"Artikel10 e.V. Abuse Handling","abuse_email":"abuse@artikel10.org","abuse_phone":null,"registered":"2021-08-19T08:09:49Z","updated":"2025-06-18T13:35:44Z","allocation_type":"ASSIGNED PA"},"ikwyd":{"exists":false,"observations":0,"torrents":[],"categories":[],"confidence":"low","source":"antitor/peer"}}

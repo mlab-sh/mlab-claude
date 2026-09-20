@@ -1,0 +1,134 @@
+{
+  "tools": [
+    {
+      "name": "detect_ioc",
+      "description": "Auto-detect the type of an indicator of compromise (IOC) and return relevant threat intelligence. Supports: IPv4, IPv6, CIDR ranges, domains, URLs, file hashes (MD5/SHA1/SHA256/SHA512), email addresses, MAC addresses.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The IOC to analyze (IP, domain, hash, URL, email, MAC...)"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "scan_ip",
+      "description": "Look up an IP address (IPv4 or IPv6) or a CIDR range: geolocation, ISP, ASN, datacenter/proxy/VPN flags, TOR consensus status, reverse DNS with forward confirmation, and the RDAP allocation record including the abuse contact.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ip": {
+            "type": "string",
+            "description": "The IP address to look up (IPv4 or IPv6), or a CIDR range"
+          }
+        },
+        "required": [
+          "ip"
+        ]
+      }
+    },
+    {
+      "name": "scan_hash",
+      "description": "Look up a file hash (MD5, SHA1 or SHA256) across several reputation feeds at once: CIRCL hashlookup, MalwareBazaar, ThreatFox, MalShare, OTX. Check sources_answered before treating a miss as meaningful.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "description": "A file hash as a hex digest: MD5 (32), SHA1 (40) or SHA256 (64)"
+          }
+        },
+        "required": [
+          "hash"
+        ]
+      }
+    },
+    {
+      "name": "scan_url",
+      "description": "Analyze a URL: scheme, host confusion, credentials-in-URL, dangerous extensions, shorteners, embedded redirects, and what a previous mlab domain scan recorded about the host. Set resolve=true only to unmask a shortener.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL to analyze"
+          },
+          "resolve": {
+            "type": "boolean",
+            "default": false,
+            "description": "Follow redirects to the real destination"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "scan_email",
+      "description": "Analyze an email address: mailbox type (disposable/role/consumer), the domain's mail spoofability verdict (SPF/DKIM/DMARC), MX presence, and an aggregate 0-100 score with weighted reasons.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address to analyze"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "scan_phone",
+      "description": "Analyze a phone number (E.164 form): validity, country/region, line type, allocated operator, formatting, and scam-shape findings. Offline lookup.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "Phone number, ideally in E.164 form with a leading '+'"
+          }
+        },
+        "required": [
+          "number"
+        ]
+      }
+    },
+    {
+      "name": "smishing_risk",
+      "description": "Score an SMS / text message for smishing (SMS phishing). Returns a 0-100 risk score, a band (clean/suspect/high/critical), a recommended filter action, the weighted reasons behind the score, and the IOCs extracted from the message.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The SMS / message body to score"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code selecting the keyword/brand pack (e.g. 'fr'). Defaults to 'fr'."
+          }
+        },
+        "required": [
+          "text"
+        ]
+      }
+    },
+    {
+      "name": "get_scan_limits",
+      "description": "Returns the remaining scan quotas for your organization (IP, domain, file, and crypto scans). Limits are per-day and shared across all organization members.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}

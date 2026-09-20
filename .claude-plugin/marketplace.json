@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "mlab-sh",
+  "description": "Official mlab.sh plugin marketplace: threat intelligence and supply-chain security workflows for SOC and DFIR teams.",
+  "version": "0.2.0",
+  "owner": {
+    "name": "mlab.sh",
+    "url": "https://mlab.sh"
+  },
+  "plugins": [
+    {
+      "name": "mlab",
+      "source": "./plugins/mlab",
+      "displayName": "mlab.sh Threat Intelligence",
+      "description": "Threat intelligence workflows powered by mlab.sh: IOC triage, SBOM vulnerability audits, threat actor profiling and phishing/smishing analysis. Includes local supply-chain skills built on postmortem.",
+      "version": "0.2.0",
+      "author": {
+        "name": "mlab.sh",
+        "url": "https://mlab.sh"
+      },
+      "homepage": "https://doc.mlab.sh/docs/mlab.sh/integrations/mcp",
+      "repository": "https://github.com/mlab-sh/mlab-claude",
+      "license": "MIT",
+      "category": "security",
+      "tags": [
+        "threat-intelligence",
+        "soc",
+        "dfir",
+        "ioc",
+        "cve",
+        "sbom",
+        "supply-chain",
+        "phishing"
+      ],
+      "keywords": [
+        "threat-intelligence",
+        "soc",
+        "dfir",
+        "ioc",
+        "cve",
+        "sbom",
+        "supply-chain",
+        "phishing"
+      ]
+    }
+  ]
+}

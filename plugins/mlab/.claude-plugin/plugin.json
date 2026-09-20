@@ -1,0 +1,25 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "mlab",
+  "displayName": "mlab.sh Threat Intelligence",
+  "version": "0.2.0",
+  "description": "Analyst-grade threat intelligence workflows on top of the mlab.sh platform: IOC triage, SBOM vulnerability audits, threat actor profiling and phishing/smishing triage.",
+  "author": {
+    "name": "mlab.sh",
+    "url": "https://mlab.sh"
+  },
+  "homepage": "https://doc.mlab.sh/docs/mlab.sh/integrations/mcp",
+  "repository": "https://github.com/mlab-sh/mlab-claude",
+  "license": "MIT",
+  "keywords": [
+    "threat-intelligence",
+    "soc",
+    "dfir",
+    "ioc",
+    "cve",
+    "sbom",
+    "supply-chain",
+    "phishing",
+    "security"
+  ]
+}

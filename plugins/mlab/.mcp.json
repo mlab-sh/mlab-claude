@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "mlab": {
+      "type": "http",
+      "url": "https://mlab.sh/mcp",
+      "headers": {
+        "Authorization": "Bearer ${MLAB_MCP_TOKEN}"
+      }
+    }
+  }
+}
