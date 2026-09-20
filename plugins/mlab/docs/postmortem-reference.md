@@ -4,10 +4,18 @@
 
 ## Preflight (every postmortem-based skill starts here)
 
-Run `postmortem --version`. If missing, do NOT install it silently; tell the user and offer:
-- macOS: `brew install mlab-sh/tap/postmortem`
-- Debian/Ubuntu: signed apt repository (see the repo README)
-- Any platform: prebuilt binaries (x86_64/arm64, macOS/Linux/Windows) from GitHub releases, or `cargo install` from source
+Run `postmortem --version`. If missing, do NOT install it silently; tell the user and offer the official install paths (from the repo README - do not improvise others):
+- Homebrew (macOS/Linux):
+  ```
+  brew tap mlab-sh/postmortem https://github.com/mlab-sh/postmortem.git
+  brew install postmortem
+  ```
+- Prebuilt binaries: grab a tarball from https://github.com/mlab-sh/postmortem/releases (macOS and Linux, arm64 and x86_64; .deb packages are also published there)
+- From source (Rust toolchain required):
+  ```
+  git clone https://github.com/mlab-sh/postmortem.git
+  cd postmortem && cargo build --release
+  ```
 Then re-check. If the user declines, fall back to what the mlab MCP tools alone can do (`scan_sbom` on a lockfile) and say what is lost (no local malware scan, no typosquat/maintainer analysis).
 
 ## Command map (what answers what)
