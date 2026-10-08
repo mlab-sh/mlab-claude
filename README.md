@@ -6,6 +6,7 @@ Official [Claude Code](https://code.claude.com) plugin marketplace for [mlab.sh]
 
 ![](./.github/banner.png)
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/mlab-sh-mlab-claude-1u2fff?v=46c31040d3b159bf0c360a3c9751d443)](https://m8ven.ai/mcp/mlab-sh-mlab-claude-1u2fff?s=readme)
 ## What you get
 
 Installing the `mlab` plugin gives Claude Code two things at once:
