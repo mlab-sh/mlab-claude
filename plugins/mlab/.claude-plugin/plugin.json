@@ -2,7 +2,7 @@
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "mlab",
   "displayName": "mlab.sh Threat Intelligence",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Analyst-grade threat intelligence workflows on top of the mlab.sh platform: IOC triage, SBOM vulnerability audits, threat actor profiling and phishing/smishing triage.",
   "author": {
     "name": "mlab.sh",

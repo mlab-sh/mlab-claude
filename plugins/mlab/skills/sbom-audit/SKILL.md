@@ -1,6 +1,6 @@
 ---
 name: sbom-audit
-description: Audit a dependency lockfile or SBOM for known vulnerabilities via mlab.sh, prioritize findings by KEV status and EPSS, and attribute actively exploited CVEs to threat actors. Use when the user provides a Cargo.lock, package-lock.json, requirements.txt, go.sum, composer.lock, Gemfile.lock or CycloneDX SBOM, or asks to check dependencies for vulnerabilities.
+description: Audit a dependency lockfile or SBOM for known vulnerabilities via mlab.sh, prioritize findings by KEV status and EPSS, and attribute actively exploited CVEs to threat actors. Use when the user provides a lockfile (package-lock.json, yarn.lock, pnpm-lock.yaml, Cargo.lock, requirements.txt, poetry.lock, uv.lock, Pipfile.lock, go.sum, composer.lock, Gemfile.lock, pom.xml, gradle.lockfile, packages.lock.json, pubspec.lock, mix.lock) or a CycloneDX / SPDX SBOM, or asks to check dependencies for vulnerabilities.
 ---
 
 # SBOM / Lockfile Vulnerability Audit
@@ -15,15 +15,17 @@ Send the raw lockfile content to `scan_sbom`. Format is auto-detected; force `fo
 
 If the lockfile lives in a repo the user pointed at, read the file and pass its full content, not a summary.
 
+Read `complete` and `coverage_notes` first. A cut manifest, `scan_failures` or `unscanned` entries mean part of the dependency tree was not checked: say so at the top of the report, never present the result as clean.
+
 ### 2. Prioritize
 
-For each advisory returned, establish severity in this order (highest signal first):
+Each finding is already one package x one CVE, with `severity`, `cvss` and `fixed_in`. Establish priority in this order (highest signal first):
 
 1. **KEV** (CISA Known Exploited Vulnerabilities) - actively exploited, always P0.
 2. **EPSS** - probability of exploitation; > 0.1 is notable, > 0.5 is urgent.
 3. **CVSS** - baseline severity, tie-breaker only.
 
-Call `cve_detail` on every CRITICAL/HIGH finding and on anything KEV-listed to get the full vector, EPSS percentile, `kev_due_date` (the CISA deadline - useful pressure in the report) and affected version ranges. Do not fan out `cve_detail` over dozens of LOW findings; summarize those in bulk.
+Call `cve_detail` on every critical/high finding that has a `cve` and on anything KEV-listed to get the full vector, EPSS percentile, `kev_due_date` (the CISA deadline - useful pressure in the report) and affected version ranges. Do not fan out `cve_detail` over dozens of LOW findings; summarize those in bulk.
 
 ### 3. Attribute what matters
 
@@ -32,7 +34,9 @@ For KEV-listed and high-EPSS CVEs, call `actors_by_cve`. Known exploitation by a
 ### 4. Report
 
 ```
-## SBOM audit: <file> - <N> packages, <M> advisories
+## SBOM audit: <file> - <N> packages, <M> vulnerabilities
+
+<coverage line when `complete` is false: what was not scanned, from `coverage_notes`>
 
 ### P0 - Actively exploited (KEV)
 | Package | Version | CVE | EPSS | Fixed in | Known actors |

@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "mlab-sh",
   "description": "Official mlab.sh plugin marketplace: threat intelligence and supply-chain security workflows for SOC and DFIR teams.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "owner": {
     "name": "mlab.sh",
     "url": "https://mlab.sh"
@@ -13,7 +13,7 @@
       "source": "./plugins/mlab",
       "displayName": "mlab.sh Threat Intelligence",
       "description": "Threat intelligence workflows powered by mlab.sh: IOC triage, SBOM vulnerability audits, threat actor profiling and phishing/smishing analysis. Includes local supply-chain skills built on postmortem.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": {
         "name": "mlab.sh",
         "url": "https://mlab.sh"

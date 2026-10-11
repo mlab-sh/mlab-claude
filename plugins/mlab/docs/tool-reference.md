@@ -76,6 +76,15 @@ Key blocks in the result:
 - `cve_search` list entries ALREADY carry `epss_score`, `in_kev`, `cvss_score`, `cvss_severity`: KEV/EPSS triage happens on search results, no `cve_detail` fan-out needed. `total_results` + `start_index` for pagination.
 - `cve_detail` adds: `cvss_vector` + `cvss_breakdown[]`, `epss_percentile`, `kev_date_added` / `kev_due_date` (the CISA remediation deadline - useful pressure in reports), `weaknesses[]` (CWE), `references[]` with tags.
 
+## scan_sbom
+
+- Input: the raw lockfile / SBOM text (`content`), `format` only to force a parser. Accepted: package-lock.json, yarn.lock, pnpm-lock.yaml, Cargo.lock, requirements.txt (`==` pins), poetry.lock, uv.lock, pdm.lock, Pipfile.lock, composer.lock, Gemfile.lock, go.sum, pom.xml, gradle.lockfile, packages.lock.json, pubspec.lock, mix.lock, mise.lock, CycloneDX (JSON/XML), SPDX (JSON/tag-value). 2 MB max.
+- `findings[]`: ONE entry per (package, CVE), worst first: `{package{ecosystem,name,version}, cve, advisories[], severity, cvss, fixed_in, summary}`. Advisories describing the same CVE (GHSA + RUSTSEC + PYSEC...) are already merged into `advisories[]`: do not count them twice. `cve` is null for an advisory without a CVE (GHSA-only, MAL-...): `cve_detail` / `actors_by_cve` cannot take those.
+- `severity` is the advisory's label, or its CVSS v3 vector scored (`cvss`): usable for triage directly; `cve_detail` is still the source for EPSS/KEV.
+- `vulnerabilities_found` counts findings (package x CVE), `by_severity` splits them. `findings_truncated: true` means only the worst 300 are listed.
+- Coverage, read it before calling anything clean: `complete: false` comes with `coverage_notes[]` in plain words. `truncated` + `total_packages` > `packages_scanned` = the manifest was cut at the tier limit (the note says how many were left out). `scan_failures[]` = packages the scanner could not check (outage or unqueryable): NOT clean. `unscanned[]` = entries that could not become a package at all (git/path dependency, unpinned requirement, Flutter SDK, SBOM component with neither purl nor CPE): report them as not covered.
+- An error result is the server's own sentence (size limit, unparseable manifest + its `supported:` hint): relay it verbatim.
+
 ## Actor tools
 
 - Slugs are compound and unguessable: Lazarus is `lazarus-group-hidden-cobra-labyrinth-chollima`, `primary_name` is "Lazarus Group, Hidden Cobra, Labyrinth Chollima". ALWAYS resolve via `search_actors` first; never construct a slug.
